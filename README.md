@@ -80,7 +80,7 @@ docker run -d –name=‘qbittorrent-filebot’
 –net=‘br0’ –ip=‘10.3.12.21’ –ip6=‘2a01:d33b:f44f:985a:10:2:12:21’ 
 -e TZ=“Europe/Paris” 
 -e ‘FILEBOT_ACTION’=‘copy’ 
--e ‘FILEBOT_LANG’=‘en’ 
+-e ‘FILEBOT_LANG’=‘fr’ 
 -e ‘MOVIE_FORMAT’=’{plex}’ 
 -e ‘SERIE_FORMAT’=’{plex}’ 
 -e ‘PUID’=‘99’ 
@@ -88,7 +88,7 @@ docker run -d –name=‘qbittorrent-filebot’
 -v ‘/mnt/user/media/’:’/media’:‘rw’ 
 -v ‘/mnt/user/downloads’:’/downloads’:‘rw’ 
 -v ‘/mnt/user/appdata/qbittorrent-filebot/’:’/data’:‘rw’ 
-‘imthai/qbittorrent-filebot’
+‘lyessi78/qbittorrent-filebot’
 ```
 
 Note: This example uses a custom network configuration. Adjust according to your needs. 🛠️
