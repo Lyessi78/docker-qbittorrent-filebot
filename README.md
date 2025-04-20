@@ -34,7 +34,6 @@ You can customize the behavior of the container using the following variables:
 | ANIME_FORMAT | animes/{n}/{e.pad(3)} - {t} | Naming format for anime files |
 | PUID | 99 | User ID for file permissions |
 | PGID | 100 | Group ID for file permissions |
-| FILES_CHECK_PERM | no | Whether to check file permissions on startup |
 | WEBUI | 8080 | Port for the web interface |
 
 ## ⚠️ Important Notes
@@ -46,7 +45,6 @@ You can customize the behavior of the container using the following variables:
 - Add your Filebot license file (psm file) to /data/filebot folder and restart the container.
 - Default qBittorrent login is "admin". A new password is generated at each startup (check logs) until you set a permanent one.
 - To customize the fb.sh script, set custom=1 inside the script to prevent overwriting on restart.
-- Setting FILES_CHECK_PERM to "yes" may significantly increase startup time.
 - If you change the default ports in the qBittorrent config, update your Docker port mappings accordingly (Not needed if you use a dedicated ip for the container, or host network mode).
 
 **Important note about FILEBOT_ACTION:**

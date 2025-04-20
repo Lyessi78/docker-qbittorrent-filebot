@@ -47,14 +47,11 @@ RUN apt-get update && \
 # Add local files
 COPY root/ /
 
-# Directory and Permissions Configuration
 RUN mkdir -p \
     /filebot/data \
     /data/filebot/logs \
-    /downloads \
-    /media \
     /data/qBittorrent && \
-    chmod -R 755 /filebot /downloads /data /media && \
+    chmod -R 755 /filebot /data && \
     chmod +x /apps/entrypoint.sh /apps/qbittorrent-config-sync.py
 
 # Install FileBot
@@ -70,14 +67,12 @@ RUN if ! getent group ${PGID}; then \
         groupmod -n qbtgroup $(getent group ${PGID} | cut -d: -f1); \
     fi && \
     useradd -u ${PUID} -g qbtgroup -d /data qbtuser && \
-    chown -R qbtuser:qbtgroup /filebot /downloads /data /media
-
+    chown -R qbtuser:qbtgroup /filebot /data
 
 # Set environment variables for execution
 # Set the locale
 ENV PUID=${PUID} \
     PGID=${PGID} \
-    FILES_CHECK_PERM=n \
     FILEBOT_LANG=fr \
     FILEBOT_CONFLICT=auto \
     FILEBOT_ACTION=copy \
