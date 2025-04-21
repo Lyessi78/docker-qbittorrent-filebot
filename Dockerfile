@@ -69,6 +69,19 @@ RUN if ! getent group ${PGID}; then \
     useradd -u ${PUID} -g qbtgroup -d /data qbtuser && \
     chown -R qbtuser:qbtgroup /filebot /data
 
+# Download last version of Vuetorrent
+RUN set -ex && \
+    VUETORRENT_URL=$(curl -s https://api.github.com/repos/VueTorrent/VueTorrent/releases/latest \
+      | grep browser_download_url \
+      | grep vuetorrent.zip \
+      | cut -d '"' -f 4) && \
+    echo "Downloading VueTorrent from $VUETORRENT_URL" && \
+    curl -L "$VUETORRENT_URL" -o /tmp/vuetorrent.zip && \
+    mkdir -p /data/qBittorrent && \
+    unzip /tmp/vuetorrent.zip -d /data/qBittorrent && \
+    rm /tmp/vuetorrent.zip && \
+    chown -R qbtuser:qbtgroup /data/qBittorrent
+
 # Set environment variables for execution
 # Set the locale
 ENV PUID=${PUID} \
