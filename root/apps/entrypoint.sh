@@ -14,6 +14,24 @@ if [ ! -f "$script" ] || [ -z "$(grep "custom=1" "$script")" ]; then
     cp /src/fb.sh /data/filebot
 fi
 
+# Download and extract latest VueTorrent
+if [ ! -f "/data/qBittorrent/index.html" ]; then
+    echo "Downloading latest VueTorrent release..."
+    VUETORRENT_URL=$(curl -s https://api.github.com/repos/VueTorrent/VueTorrent/releases/latest \
+      | grep browser_download_url \
+      | grep vuetorrent.zip \
+      | cut -d '"' -f 4)
+
+    if [ -n "$VUETORRENT_URL" ]; then
+        curl -L "$VUETORRENT_URL" -o /tmp/vuetorrent.zip
+        unzip /tmp/vuetorrent.zip -d /data/qBittorrent
+        rm /tmp/vuetorrent.zip
+        echo "VueTorrent successfully installed in /data/qBittorrent."
+    else
+        echo "⚠️  Failed to fetch VueTorrent URL."
+    fi
+fi
+
 # Set proper permissions (safe — only internal dirs)
 chown -R qbtuser:qbtgroup /data /filebot
 chmod +x /data/filebot/fb.sh
