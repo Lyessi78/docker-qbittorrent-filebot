@@ -40,9 +40,9 @@ RUN apt-get update && \
     # Clean up the package cache
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* && \
-    sed -i '/fr_FR.UTF-8/s/^# //g' /etc/locale.gen && \
-    locale-gen fr_FR.UTF-8 && \
-    update-locale LANG=fr_FR.UTF-8 LC_ALL=fr_FR.UTF-8
+    sed -i '/en_US.UTF-8/s/^# //g' /etc/locale.gen && \
+    locale-gen en_US.UTF-8 && \
+    update-locale LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8
 
 # Add local files
 COPY root/ /
@@ -73,7 +73,7 @@ RUN if ! getent group ${PGID}; then \
 # Set the locale
 ENV PUID=${PUID} \
     PGID=${PGID} \
-    FILEBOT_LANG=fr \
+    FILEBOT_LANG=en \
     FILEBOT_CONFLICT=auto \
     FILEBOT_ACTION=copy \
     FILEBOT_ARTWORK=y \
@@ -86,8 +86,8 @@ ENV PUID=${PUID} \
     HOME="/data" \
     XDG_CONFIG_HOME="/data" \
     XDG_DATA_HOME="/data" \
-    LANG=fr_FR.UTF-8 \
-    LC_ALL=fr_FR.UTF-8
+    LANG=en_US.UTF-8 \
+    LC_ALL=en_US.UTF-8
 
 EXPOSE 8080
 

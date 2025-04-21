@@ -78,7 +78,7 @@ docker run -d –name=‘qbittorrent-filebot’
 –net=‘br0’ –ip=‘10.3.12.21’ –ip6=‘2a01:d33b:f44f:985a:10:2:12:21’ 
 -e TZ=“Europe/Paris” 
 -e ‘FILEBOT_ACTION’=‘copy’ 
--e ‘FILEBOT_LANG’=‘fr’ 
+-e ‘FILEBOT_LANG’=‘en’ 
 -e ‘MOVIE_FORMAT’=’{plex}’ 
 -e ‘SERIE_FORMAT’=’{plex}’ 
 -e ‘PUID’=‘99’ 
