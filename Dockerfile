@@ -1,5 +1,5 @@
 # Use Ubuntu rolling as base image
-FROM ubuntu:24.04
+FROM ubuntu:22.04
 
 # Set default values for build
 ARG PUID=99
