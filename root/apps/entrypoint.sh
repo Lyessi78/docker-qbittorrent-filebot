@@ -15,7 +15,7 @@ if [ ! -f "$script" ] || [ -z "$(grep "custom=1" "$script")" ]; then
 fi
 
 # Download and extract latest VueTorrent
-if [ ! -f "/data/qBittorrent/index.html" ]; then
+if [ ! -d "/data/qBittorrent/vuetorrent" ]; then
     echo "Downloading latest VueTorrent release..."
     VUETORRENT_URL=$(curl -s https://api.github.com/repos/VueTorrent/VueTorrent/releases/latest \
       | grep browser_download_url \
