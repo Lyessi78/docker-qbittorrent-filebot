@@ -51,7 +51,7 @@ RUN mkdir -p \
     /filebot/data \
     /data/filebot/logs \
     /data/qBittorrent && \
-    chmod -R 775 /filebot /data /downloads /media && \
+    chmod -R 755 /filebot /data && \
     chmod +x /apps/entrypoint.sh /apps/qbittorrent-config-sync.py
 
 # Install FileBot
