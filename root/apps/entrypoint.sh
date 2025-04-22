@@ -35,7 +35,6 @@ fi
 # Set proper permissions (safe — only internal dirs)
 chown -R qbtuser:qbtgroup /data /filebot
 chmod +x /data/filebot/fb.sh
-chmod -R 775 /downloads /media
 
 # Set the license
 license=$(find /data/ -iname "*.psm" | head -n1)
