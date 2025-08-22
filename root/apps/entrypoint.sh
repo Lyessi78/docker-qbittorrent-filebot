@@ -54,10 +54,14 @@ fi
 # Path to the config sync script
 CONFIG_SYNC_SCRIPT="/apps/qbittorrent-config-sync.py"
 
-echo "Starting qBittorrent configuration sync..."
-# Run the configuration sync script
-python3 "$CONFIG_SYNC_SCRIPT"
-echo "Configuration sync completed."
+if [ "${DISABLE_CONFIG_OVERWRITE}" = "true" ]; then
+    echo "DISABLE_CONFIG_OVERWRITE is set to true, skipping configuration sync."
+else
+    echo "Starting qBittorrent configuration sync..."
+    # Run the configuration sync script
+    python3 "$CONFIG_SYNC_SCRIPT"
+    echo "Configuration sync completed."
+fi
 
 # Start qBittorrent
 echo "Starting qBittorrent..."

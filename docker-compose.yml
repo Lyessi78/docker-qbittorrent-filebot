@@ -1,0 +1,31 @@
+version: "3.8"
+services:
+  qbittorrent-filebot:
+    image: lyessi78/qbittorrent-filebot:latest
+    container_name: qbittorrent-filebot
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Paris
+      - FILEBOT_LANG=fr
+      - FILEBOT_ACTION=copy
+      - MOVIE_FORMAT={plex}
+      - SERIE_FORMAT={plex}
+      - DISABLE_CONFIG_OVERWRITE=true
+    volumes:
+      - ./data:/data
+      - ./downloads:/downloads
+      - ./media:/media
+    ports:
+      - "8080:8080"
+      - "6881:6881"
+      - "6881:6881/udp"
+    restart: unless-stopped
+
+  watchtower:
+    image: containrrr/watchtower
+    container_name: watchtower
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    command: --interval 3600 # Check for new images every hour
+    restart: unless-stopped
