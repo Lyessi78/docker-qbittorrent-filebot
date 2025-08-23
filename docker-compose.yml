@@ -4,22 +4,33 @@ services:
     image: lyessi78/qbittorrent-filebot:latest
     container_name: qbittorrent-filebot
     environment:
-      - PUID=1000
-      - PGID=1000
+      - PUID=1031
+      - PGID=65537
       - TZ=Europe/Paris
       - FILEBOT_LANG=fr
+      - FILEBOT_CONFLICT=auto
       - FILEBOT_ACTION=copy
+      - FILEBOT_ARTWORK=y
+      - FILEBOT_PROCESS_MUSIC=y
+      - MUSIC_FORMAT={plex}
       - MOVIE_FORMAT={plex}
       - SERIE_FORMAT={plex}
+      - ANIME_FORMAT=animes/{n}/{e.pad(3)} - {t}
+      - HOME=/data
+      - XDG_CONFIG_HOME=/data
+      - XDG_DATA_HOME=/data
+      - LANG=en_US.UTF-8
+      - LC_ALL=en_US.UTF-8
+      - EXTRA_FILEBOT_PARAM=
       - DISABLE_CONFIG_OVERWRITE=true
     volumes:
-      - ./data:/data
-      - ./downloads:/downloads
-      - ./media:/media
+      - /volume2/docker/qbittorrent-filebot:/data
+      - /volume2/download:/downloads
+      - /volume2/logiciels:/logiciels
+      - /volume2/jeux:/jeux
+      - /volume2/PlexMedia:/media
     ports:
       - "8080:8080"
-      - "6881:6881"
-      - "6881:6881/udp"
     restart: unless-stopped
 
   watchtower:
@@ -27,5 +38,5 @@ services:
     container_name: watchtower
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-    command: --interval 3600 # Check for new images every hour
+    command: --interval 3600 # Vérifie les mises à jour toutes les heures
     restart: unless-stopped
