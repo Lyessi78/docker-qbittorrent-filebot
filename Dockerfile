@@ -6,7 +6,7 @@ ARG PUID=99
 ARG PGID=100
 
 # Update packages and install necessary dependencies
-RUN apt-get update && \
+RUN apt-get update && \ 
     apt-get install -y --no-install-recommends \
         software-properties-common \
         gnupg \
